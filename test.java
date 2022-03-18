@@ -31,7 +31,7 @@ public class Laboratory extends Entity {
 
   @CommandHandler
 	public void handle(CreateIdentifierLABCommand cmd) {
-		AggregateLifecycle.apply(new IdentifierCreatedEvent(cmd.externalId, cmd.am));
+		AggregateLifecycle.apply(new IdentifierCreatedEvent(cmd.entityId , cmd.am));
 	}
 
 	public OperatingSystem getOperatingSystem() {
@@ -53,7 +53,7 @@ public class Entity {
 
 	@EventSourcingHandler
 	public void on(IdentifierCreatedEvent evt) {
-		this.entityId = evt.externalId;
+		this.entityId = evt.entityId;
 		this.identifiers.add(evt.identifiant);
 	}
 
